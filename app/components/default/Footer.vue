@@ -23,9 +23,10 @@
                             <NuxtImg :src="red.src" :alt="red.nombre" width="32" height="32" />
                         </a>
                     </div>
-                    <p class="text-sm lg:text-base text-primary font-medium">Copyright {{ new Date().getFullYear() }}
-                        Unike Group S.A.
-                    </p>
+                    <NuxtLink to="https://www.benteveo.com" target="_blank"
+                        class="text-sm lg:text-base text-primary font-medium">© Copyright {{ new Date().getFullYear() }}
+                        Benteveo
+                    </NuxtLink>
                 </div>
             </div>
         </div>
