@@ -5,14 +5,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   css: ['~/assets/css/main.css'],
-
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
       include: ['@vue/devtools-core', '@vue/devtools-kit']
     }
   },
-
   modules: [
     '@nuxt/fonts',
     '@nuxt/icon',
@@ -20,7 +18,6 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
     '@nuxtjs/supabase'
   ],
-
   app: {
     head: {
       charset: 'utf-8',
@@ -40,7 +37,6 @@ export default defineNuxtConfig({
       ]
     }
   },
-
   runtimeConfig: {
     public: {
       siteUrl: 'https://www.murallon.com.ar/',
@@ -50,42 +46,34 @@ export default defineNuxtConfig({
       }
     }
   },
-
   site: {
     url: 'https://www.murallon.com.ar/',
     name: 'Murallón',
     description: 'Murallón — soluciones innovadoras en almacenamiento y tratamiento del agua. Tanques, accesorios y asesoramiento técnico en Argentina.',
     defaultLocale: 'es'
   },
-
   seo: {
     fallbackTitle: false,
     redirectToCanonicalSiteUrl: false
   },
-
   fonts: {
     defaults: {
       weights: [300, 400, 500, 600, 700, 800]
     }
   },
-
   icon: {
     provider: 'iconify',
     collections: ['material-symbols']
   },
-
   image: {
     format: ['webp']
   },
-
   ogImage: {
     enabled: false
   },
-
   schemaOrg: {
     enabled: false
   },
-
   supabase: {
     redirect: false
   }

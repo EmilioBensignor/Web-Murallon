@@ -44,7 +44,7 @@
                         <div v-if="mapLoaded && selectedDistribuidor"
                             class="w-[90%] md:max-w-64 lg:max-w-72 flex flex-col gap-3 absolute bottom-4 md:top-6 md:bottom-auto left-0 md:left-6 md:right-auto right-0 bg-white rounded-[18px] shadow-md shadow-dark/20 z-10 p-3 mx-auto md:mx-0">
                             <div class="flex justify-between items-start gap-3">
-                                <div class="flex items-start gap-1 text-terciary">
+                                <div class="flex items-start gap-1 text-primary">
                                     <Icon name="material-symbols:shopping-bag-outline" class="shrink-0" />
                                     <p class="text-sm font-semibold">{{ selectedDistribuidor.nombreComercio }}</p>
                                 </div>
@@ -72,7 +72,7 @@
                                 </div>
                                 <a :href="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${selectedDistribuidor.nombreComercio}, ${selectedDistribuidor.calle}, ${selectedDistribuidor.localidad}, ${selectedDistribuidor.provincia}`)}`"
                                     target="_blank" rel="noopener noreferrer"
-                                    class="flex items-center justify-center gap-2 bg-terciary text-white text-xs font-medium rounded-full py-2 px-4 mt-1">
+                                    class="flex items-center justify-center gap-2 bg-primary text-white text-xs font-medium rounded-full py-2 px-4 mt-1">
                                     <Icon name="material-symbols:map-outline" />
                                     Abrir en Google Maps
                                 </a>
@@ -325,8 +325,8 @@ const updateMarkers = () => {
             markerContainer.style.cssText = 'cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation;'
 
             const markerImg = document.createElement('img')
-            markerImg.src = '/images/murallon/Murallon-Group-Maps.svg'
-            markerImg.style.cssText = 'width: 100px; height: 40px; pointer-events: none; display: block;'
+            markerImg.src = '/images/Murallon-Maps.svg'
+            markerImg.style.cssText = 'width: 100px; height: 54px; pointer-events: none; display: block;'
             markerImg.alt = distribuidor.nombreComercio
             markerContainer.appendChild(markerImg)
 

@@ -20,7 +20,7 @@
                     <div class="flex items-center gap-2 border border-gray-mid rounded-full px-3 py-2">
                         <input type="text" :value="search" @input="$emit('update:search', $event.target.value)"
                             placeholder="Buscar" class="flex-1 text-sm outline-none bg-transparent" />
-                        <Icon name="material-symbols:search-rounded" size="1.25rem" class="text-gray-dark" />
+                        <Icon name="material-symbols:search-rounded" size="1.5rem" class="text-gray-dark" />
                     </div>
                 </div>
 
