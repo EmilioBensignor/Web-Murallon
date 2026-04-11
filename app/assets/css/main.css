@@ -18,6 +18,7 @@
   --color-dark: #010101;
   --color-light: #F9F9F9;
   --color-error: #F03A36;
+  --color-gray-orange: #ACA19C;
   --color-gray-mid: #E9E9E9;
 
   /* Gradientes */
@@ -36,6 +37,7 @@ html,
 body {
   height: 100%;
   scroll-behavior: smooth;
+  background-color: var(--color-light);
   color: var(--color-dark);
 }
 

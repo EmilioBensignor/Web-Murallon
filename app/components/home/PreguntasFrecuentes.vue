@@ -3,7 +3,6 @@
         <div class="lg:w-full flex flex-col lg:flex-row lg:justify-between md:items-center gap-3 md:gap-6">
             <HeadingH2 class="text-primary uppercase">Preguntas Frecuentes</HeadingH2>
 
-            <!-- Botones ocultos temporalmente -->
             <!-- <div class="flex flex-col md:flex-row gap-2">
                 <ButtonPrimary class="md:w-60">Sobre nosotros</ButtonPrimary>
                 <ButtonPrimary class="md:w-60 bg-white border border-primary text-primary!">Sobre nuestras pinturas

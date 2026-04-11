@@ -46,17 +46,17 @@
 const soluciones = [
     {
         titulo: 'Prepará la superficie',
-        imagen: '/images/home/soluciones/Prepara-la-superficie.png',
+        imagen: '/images/home/soluciones/murallon_soluciones_preparar_1376.webp',
         to: '/productos/prepara-la-superficie'
     },
     {
         titulo: 'Renová tus espacios',
-        imagen: '/images/home/soluciones/Renova-tus-espacios.png',
+        imagen: '/images/home/soluciones/murallon_soluciones_renovar_1376.webp',
         to: '/productos/renova-tus-espacios'
     },
     {
         titulo: 'Protegé de la humedad',
-        imagen: '/images/home/soluciones/Protege-la-humedad.png',
+        imagen: '/images/home/soluciones/murallon_soluciones_proteger_1376.webp',
         to: '/productos/protege-de-la-humedad'
     }
 ]

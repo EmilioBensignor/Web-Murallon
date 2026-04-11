@@ -1,6 +1,6 @@
 <template>
     <DefaultSection class="bg-primary" inner-class="md:flex-row-reverse gap-0">
-        <NuxtImg src="/images/home/Hero-Murallon.png" alt="Hero Murallon"
+        <NuxtImg src="/images/home/Hero-Murallon.webp" alt="Hero Murallon"
             class="w-full md:w-1/2 h-full lg:min-h-125 object-cover" />
         <div
             class="w-full md:w-1/2 flex flex-col md:justify-center items-center md:items-start gap-3 md:gap-4 lg:gap-6 bg-primary text-center md:text-start text-white py-6 px-4 md:px-8 lg:px-16 xxl:px-0">

@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-(image:--gradient-multi) pt-2.5 mt-6">
+    <footer class="bg-(image:--gradient-multi) pt-2.5 mt-6 md:mt-8 lg:mt-12 xxl:mt-16">
         <div class="bg-white">
             <div class="w-full xxl:max-w-326 mx-auto">
                 <div class="flex flex-col items-center gap-8 lg:gap-12 xxl:gap-16 py-6 md:py-8 lg:py-12">
