@@ -23,6 +23,7 @@
 
   /* Gradientes */
   --gradient-multi: linear-gradient(90deg, #E95C94 0%, #EBC213 25%, #B2CC38 50%, #50AC35 75%, #3F78BC 100%);
+  --gradient-multi-vertical: linear-gradient(180deg, #E95C94 0%, #EBC213 25%, #B2CC38 50%, #50AC35 75%, #3F78BC 100%);
 
   /* Sombras */
   --shadow-1: 0px 1px 4px 0px rgba(12, 12, 13, 0.15);
@@ -39,6 +40,14 @@ body {
   scroll-behavior: smooth;
   background-color: var(--color-light);
   color: var(--color-dark);
+}
+
+@utility bg-gradient-multi {
+  background-image: var(--gradient-multi);
+}
+
+@utility bg-gradient-multi-vertical {
+  background-image: var(--gradient-multi-vertical);
 }
 
 @utility scrollbar-hide {
