@@ -12,7 +12,7 @@
 
         <div class="md:w-1/2 flex flex-col gap-3 lg:gap-4">
             <div class="flex sm:justify-center items-center relative px-4 md:px-0">
-                <button type="button" aria-label="Anterior"
+                <button v-if="imagenes.length > 1" type="button" aria-label="Anterior"
                     class="w-12 h-12 flex justify-center items-center absolute left-4 md:left-0 z-10 bg-terciary rounded-full text-primary shadow-1 cursor-pointer"
                     @click="prev">
                     <Icon name="material-symbols:arrow-back-rounded" size="24" />
@@ -24,7 +24,7 @@
                         class="w-full h-full object-contain transition-opacity duration-300" />
                 </div>
 
-                <button type="button" aria-label="Siguiente"
+                <button v-if="imagenes.length > 1" type="button" aria-label="Siguiente"
                     class="w-12 h-12 flex justify-center items-center absolute right-4 md:right-0 z-10 bg-terciary rounded-full text-primary shadow-1 cursor-pointer"
                     @click="next">
                     <Icon name="material-symbols:arrow-forward-rounded" size="24" />
