@@ -15,18 +15,20 @@
                 <div class="flex gap-6 bg-white rounded-3xl shadow-1 p-6">
                     <div class="flex flex-col shrink-0 w-max">
                         <p class="text-secondary font-bold p-4">Por categoría</p>
-                        <button v-for="cat in categorias" :key="cat.nombre" type="button" :class="[
-                            'text-left text-sm font-semibold hover:bg-gray-mid rounded-full transition-colors cursor-pointer p-4',
-                            categoriaHover?.nombre === cat.nombre ? 'bg-gray-mid' : '',]"
-                            @mouseenter="categoriaHover = cat" @click="categoriaHover = cat">
+                        <NuxtLink v-for="cat in categorias" :key="cat.nombre"
+                            :to="{ path: ROUTE_NAMES.PRODUCTOS, query: { solucion: cat.solucion } }" :class="[
+                                'text-left text-sm font-semibold hover:bg-gray-mid rounded-full transition-colors cursor-pointer p-4',
+                                categoriaHover?.nombre === cat.nombre ? 'bg-gray-mid' : '',]"
+                            @mouseenter="categoriaHover = cat" @click="isOpen = false">
                             {{ cat.nombre }}
-                        </button>
+                        </NuxtLink>
                     </div>
 
                     <div v-if="categoriaHover" class="flex flex-col shrink-0 w-max">
                         <p class="text-secondary font-bold p-4">Nuestras Soluciones</p>
-                        <NuxtLink v-for="producto in categoriaHover.productos" :key="producto.id" to="/productos"
-                            class="text-sm text-dark font-semibold p-4"
+                        <NuxtLink v-for="producto in categoriaHover.productos" :key="producto.id"
+                            :to="`${ROUTE_NAMES.PRODUCTOS}/${producto.slug}`"
+                            class="text-sm text-dark font-semibold hover:bg-gray-mid rounded-full transition-colors cursor-pointer p-4"
                             @click="isOpen = false">
                             {{ producto.nombre }}
                         </NuxtLink>
@@ -39,13 +41,14 @@
 </template>
 
 <script setup>
+import { ROUTE_NAMES } from '~/constants/ROUTE_NAMES';
+
 const { categorias, fetchMenuProductos } = useMenuProductos()
 
 const dropdownRef = ref(null)
 const isOpen = ref(false)
 const categoriaHover = ref(null)
 
-// Al cerrar, resetear categoría hover
 watch(isOpen, (val) => {
     if (!val) {
         categoriaHover.value = null

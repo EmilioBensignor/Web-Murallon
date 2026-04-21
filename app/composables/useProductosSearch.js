@@ -8,7 +8,6 @@ export const useProductosSearch = () => {
   const loading = ref(false)
   const error = ref(null)
 
-  // Categorias que vienen de murallon-categorias
   const CATEGORIAS = [
     'Enduidos',
     'Fijadores',
@@ -28,7 +27,6 @@ export const useProductosSearch = () => {
   const solucionInicial = SOLUCIONES_VALIDAS.includes(route.query.solucion) ? route.query.solucion : ''
   const solucionActiva = ref(solucionInicial)
 
-  // Sincroniza el query param cuando cambia la solucion activa
   watch(solucionActiva, (nueva) => {
     const actual = route.query.solucion || ''
     if (actual === nueva) return
@@ -39,6 +37,11 @@ export const useProductosSearch = () => {
       delete query.solucion
     }
     router.replace({ query })
+  })
+
+  watch(() => route.query.solucion, (nueva) => {
+    const valor = SOLUCIONES_VALIDAS.includes(nueva) ? nueva : ''
+    if (solucionActiva.value !== valor) solucionActiva.value = valor
   })
 
   const filtros = ref({
@@ -114,7 +117,6 @@ export const useProductosSearch = () => {
     }
   }
 
-  // Extrae el número de rendimiento del texto (ej: "10 – 16 m² / L" → 10)
   function parseRendimiento(texto) {
     if (!texto) return null
     const match = texto.match(/(\d+)/)
@@ -124,7 +126,6 @@ export const useProductosSearch = () => {
   const productosFiltrados = computed(() => {
     let resultado = [...productos.value]
 
-    // Filtrar por solucion activa
     if (solucionActiva.value) {
       const ids = SOLUCION_MAP[solucionActiva.value]
       if (Array.isArray(ids)) {
@@ -138,7 +139,6 @@ export const useProductosSearch = () => {
       }
     }
 
-    // Filtrar por categorias activas (join con murallon-categorias)
     const categoriasActivas = Object.entries(filtros.value.categorias)
       .filter(([, v]) => v).map(([k]) => k.toLowerCase())
     if (categoriasActivas.length) {
@@ -147,7 +147,6 @@ export const useProductosSearch = () => {
       )
     }
 
-    // Filtrar por usos activos (uso es array en DB: ["Interior", "Exterior"])
     const usosActivos = Object.entries(filtros.value.usos)
       .filter(([, v]) => v).map(([k]) => k)
     if (usosActivos.length) {
@@ -156,7 +155,6 @@ export const useProductosSearch = () => {
       )
     }
 
-    // Filtrar por tamanos activos (tamanos_disponibles es array en DB)
     const tamanosActivos = Object.entries(filtros.value.tamanos)
       .filter(([, v]) => v).map(([k]) => k)
     if (tamanosActivos.length) {
@@ -165,7 +163,6 @@ export const useProductosSearch = () => {
       )
     }
 
-    // Filtrar por rendimiento (parsear texto a número)
     const [minR, maxR] = filtros.value.rendimiento
     if (minR > RENDIMIENTO_RANGE.min || maxR < RENDIMIENTO_RANGE.max) {
       resultado = resultado.filter(p => {
@@ -174,7 +171,6 @@ export const useProductosSearch = () => {
       })
     }
 
-    // Ordenar
     if (filtros.value.orden === 'nombre-asc') {
       resultado.sort((a, b) => a.nombre.localeCompare(b.nombre))
     } else if (filtros.value.orden === 'nombre-desc') {

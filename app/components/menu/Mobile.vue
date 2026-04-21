@@ -60,27 +60,11 @@
                             <div v-else-if="nivel === 1" key="nivel-1" class="flex flex-col gap-6 px-4 sm:px-6">
                                 <nav class="flex flex-col gap-1">
                                     <p class="text-left text-sm font-bold text-secondary py-4">Por categoría</p>
-                                    <button v-for="cat in categorias" :key="cat.nombre" type="button"
-                                        class="text-left text-xs font-semibold text-dark py-4 cursor-pointer"
-                                        @click="seleccionarCategoria(cat)">
-                                        {{ cat.nombre }}
-                                    </button>
-                                </nav>
-                                <div class="flex justify-center">
-                                    <NuxtImg src="/images/Logo-Murallon.svg" alt="Logo Murallon"
-                                        class="w-48 h-6 object-contain" />
-                                </div>
-                            </div>
-
-                            <div v-else-if="nivel === 2 && categoriaActiva" key="nivel-2"
-                                class="flex flex-col gap-6 px-4 sm:px-6">
-                                <nav class="flex flex-col">
-                                    <p class="text-left text-sm font-bold text-secondary py-4">Nuestras soluciones</p>
-                                    <NuxtLink v-for="producto in categoriaActiva.productos" :key="producto.id"
-                                        to="/productos"
+                                    <NuxtLink v-for="cat in categorias" :key="cat.nombre"
+                                        :to="{ path: ROUTE_NAMES.PRODUCTOS, query: { solucion: cat.solucion } }"
                                         class="text-left text-xs font-semibold text-dark py-4 cursor-pointer"
                                         @click="close">
-                                        {{ producto.nombre }}
+                                        {{ cat.nombre }}
                                     </NuxtLink>
                                 </nav>
                                 <div class="flex justify-center">
@@ -88,6 +72,7 @@
                                         class="w-48 h-6 object-contain" />
                                 </div>
                             </div>
+
                         </Transition>
                     </div>
                 </div>
@@ -97,11 +82,12 @@
 </template>
 
 <script setup>
+import { ROUTE_NAMES } from '~/constants/ROUTE_NAMES';
+
 const { categorias, fetchMenuProductos } = useMenuProductos()
 
 const isOpen = ref(false)
 const nivel = ref(0)
-const categoriaActiva = ref(null)
 const direccion = ref('adelante')
 
 function irA(n) {
@@ -109,18 +95,9 @@ function irA(n) {
     nivel.value = n
 }
 
-function seleccionarCategoria(cat) {
-    direccion.value = 'adelante'
-    categoriaActiva.value = cat
-    nivel.value = 2
-}
-
 function volver() {
     direccion.value = 'atras'
-    if (nivel.value === 2) {
-        nivel.value = 1
-        categoriaActiva.value = null
-    } else if (nivel.value === 1) {
+    if (nivel.value === 1) {
         nivel.value = 0
     }
 }
@@ -128,7 +105,6 @@ function volver() {
 function close() {
     isOpen.value = false
     nivel.value = 0
-    categoriaActiva.value = null
 }
 
 watch(isOpen, (val) => {
