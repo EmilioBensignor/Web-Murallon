@@ -3,9 +3,9 @@
         <div class="md:w-full md:flex md:justify-between md:items-center">
             <div class="flex flex-col md:flex-row items-center md:gap-2">
                 <HeadingH2 class="text-white uppercase">Nuestro Blog</HeadingH2>
-                <ButtonTerciary to="#" class="bg-transparent text-terciary underline">
+                <!-- <ButtonTerciary to="#" class="bg-transparent text-terciary underline">
                     Ver todos los artículos
-                </ButtonTerciary>
+                </ButtonTerciary> -->
             </div>
             <CarouselArrows @prev="carouselRef?.scrollLeft()" @next="carouselRef?.scrollRight()" />
         </div>

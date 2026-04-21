@@ -1,6 +1,8 @@
 export const useProductosSearch = () => {
   const supabase = useSupabaseClient()
   const config = useRuntimeConfig()
+  const route = useRoute()
+  const router = useRouter()
 
   const productos = ref([])
   const loading = ref(false)
@@ -22,7 +24,22 @@ export const useProductosSearch = () => {
 
   const RENDIMIENTO_RANGE = { min: 1, max: 16 }
 
-  const solucionActiva = ref('')
+  const SOLUCIONES_VALIDAS = ['prepara', 'renova', 'protege']
+  const solucionInicial = SOLUCIONES_VALIDAS.includes(route.query.solucion) ? route.query.solucion : ''
+  const solucionActiva = ref(solucionInicial)
+
+  // Sincroniza el query param cuando cambia la solucion activa
+  watch(solucionActiva, (nueva) => {
+    const actual = route.query.solucion || ''
+    if (actual === nueva) return
+    const query = { ...route.query }
+    if (nueva) {
+      query.solucion = nueva
+    } else {
+      delete query.solucion
+    }
+    router.replace({ query })
+  })
 
   const filtros = ref({
     categorias: {},

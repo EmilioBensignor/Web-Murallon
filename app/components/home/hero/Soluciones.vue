@@ -3,7 +3,7 @@
         <div class="bg-secondary text-white pt-6 md:pt-8 md:px-8 lg:px-16 pb-20 md:pb-21.5 lg:pb-35">
             <div class="max-w-326 flex flex-col md:flex-row md:justify-between items-center mx-auto">
                 <HeadingH2 class="text-white uppercase">Nuestras soluciones</HeadingH2>
-                <ButtonTerciary class="bg-transparent text-terciary underline">
+                <ButtonTerciary :to="ROUTE_NAMES.PRODUCTOS" class="bg-transparent text-terciary underline">
                     Ver todos los productos
                 </ButtonTerciary>
             </div>
@@ -11,7 +11,7 @@
         <div class="md:hidden -mt-16">
             <CarouselStatic :slides-per-view="{ base: 1.4, sm: 2.4, tab: 2.8 }" :gap="16" :show-arrows="false"
                 :show-dots="false">
-                <NuxtLink v-for="card in soluciones" :key="card.titulo" to="#"
+                <NuxtLink v-for="card in soluciones" :key="card.titulo" :to="card.to"
                     class="h-36 relative rounded-2xl overflow-hidden">
                     <NuxtImg :src="card.imagen" :alt="card.titulo" class="w-full h-full object-cover" />
                     <div class="flex items-center justify-center absolute inset-0 text-center p-6">
@@ -43,21 +43,23 @@
 </template>
 
 <script setup>
+import { ROUTE_NAMES } from '~/constants/ROUTE_NAMES';
+
 const soluciones = [
     {
         titulo: 'Prepará la superficie',
         imagen: '/images/home/soluciones/murallon_soluciones_preparar_1376.webp',
-        to: '/productos/prepara-la-superficie'
+        to: { path: ROUTE_NAMES.PRODUCTOS, query: { solucion: 'prepara' } }
     },
     {
         titulo: 'Renová tus espacios',
         imagen: '/images/home/soluciones/murallon_soluciones_renovar_1376.webp',
-        to: '/productos/renova-tus-espacios'
+        to: { path: ROUTE_NAMES.PRODUCTOS, query: { solucion: 'renova' } }
     },
     {
         titulo: 'Protegé de la humedad',
         imagen: '/images/home/soluciones/murallon_soluciones_proteger_1376.webp',
-        to: '/productos/protege-de-la-humedad'
+        to: { path: ROUTE_NAMES.PRODUCTOS, query: { solucion: 'protege' } }
     }
 ]
 </script>
