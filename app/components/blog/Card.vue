@@ -12,7 +12,7 @@
             </div>
 
             <div class="mt-auto">
-                <ButtonPrimary class="px-12">
+                <ButtonPrimary :to="`/blog/${post.slug}`" class="px-12">
                     Leer más
                 </ButtonPrimary>
             </div>

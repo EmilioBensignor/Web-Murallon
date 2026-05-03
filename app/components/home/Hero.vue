@@ -1,9 +1,9 @@
 <template>
     <DefaultSection class="bg-primary" inner-class="md:flex-row-reverse gap-0">
-        <picture class="w-full md:w-1/2 h-full lg:min-h-125">
+        <picture class="w-full md:w-1/2 md:h-auto md:self-stretch lg:min-h-125 flex">
             <source v-if="imagenes?.grande" media="(min-width: 1080px)" :srcset="imagenes.grande" />
-            <source v-if="imagenes?.mediana" media="(min-width: 600px)" :srcset="imagenes.mediana" />
-            <img :src="imagenes?.chica || '/images/home/Hero-Murallon.webp'" alt="Hero Murallon"
+            <source v-if="imagenes?.mediana" media="(min-width: 768px)" :srcset="imagenes.mediana" />
+            <NuxtImg :src="imagenes?.chica || '/images/home/Hero-Murallon.webp'" alt="Hero Murallon"
                 class="w-full h-full object-cover" />
         </picture>
         <div
