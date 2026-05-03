@@ -14,6 +14,7 @@
             <p class="text-xl text-secondary font-bold">Artículo no encontrado</p>
             <ButtonPrimary :to="ROUTE_NAMES.HOME">Volver al inicio</ButtonPrimary>
         </div>
+        <HomeBlog />
     </DefaultMain>
 </template>
 
