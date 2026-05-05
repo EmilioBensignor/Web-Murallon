@@ -9,12 +9,22 @@
                         <div v-for="seccion in secciones.filter(s => s.links?.length)" :key="seccion.titulo"
                             class="flex flex-col md:items-start gap-3">
                             <p class="lg:text-xl font-bold uppercase">{{ seccion.titulo }}</p>
-                            <component v-for="link in seccion.links" :key="link.texto" :is="link.to ? 'NuxtLink' : 'a'"
-                                v-bind="link.to ? { to: link.to } : { href: link.href, target: link.target }"
-                                class="flex items-center justify-center gap-2.5 text-sm font-medium">
-                                <Icon v-if="link.icon" :name="link.icon" size="20" />
-                                <span class="text-sm lg:text-base font-medium" v-html="link.texto" />
-                            </component>
+                            <template v-for="link in seccion.links" :key="link.texto">
+                                <NuxtLink v-if="link.to" :to="link.to"
+                                    class="flex items-center justify-center gap-2.5 text-sm lg:text-base font-medium">
+                                    <Icon v-if="link.icon" :name="link.icon" size="20" />
+                                    <span v-html="link.texto" />
+                                </NuxtLink>
+                                <a v-else-if="link.href" :href="link.href" :target="link.target"
+                                    class="flex items-center justify-center gap-2.5 text-sm lg:text-base font-medium">
+                                    <Icon v-if="link.icon" :name="link.icon" size="20" />
+                                    <span v-html="link.texto" />
+                                </a>
+                                <p v-else class="flex items-center justify-center gap-2.5 text-sm lg:text-base font-medium">
+                                    <Icon v-if="link.icon" :name="link.icon" size="20" />
+                                    <span v-html="link.texto" />
+                                </p>
+                            </template>
                         </div>
                     </div>
                     <div class="flex items-center gap-4 lg:gap-6">
@@ -62,9 +72,9 @@ const secciones = [
 ]
 
 const redes = [
-    { nombre: 'Instagram', src: '/images/redes/Logo-Instagram.svg', url: '#' },
-    { nombre: 'Facebook', src: '/images/redes/Logo-Facebook.svg', url: '#' },
-    { nombre: 'Youtube', src: '/images/redes/Logo-Youtube.svg', url: '#' },
-    { nombre: 'LinkedIn', src: '/images/redes/Logo-LinkedIn.svg', url: '#' },
-]
+    { nombre: 'Instagram', src: '/images/redes/Logo-Instagram.svg', url: ROUTE_NAMES.REDES.INSTAGRAM },
+    { nombre: 'Facebook', src: '/images/redes/Logo-Facebook.svg', url: ROUTE_NAMES.REDES.FACEBOOK },
+    { nombre: 'Youtube', src: '/images/redes/Logo-Youtube.svg', url: ROUTE_NAMES.REDES.YOUTUBE },
+    { nombre: 'LinkedIn', src: '/images/redes/Logo-LinkedIn.svg', url: ROUTE_NAMES.REDES.LINKEDIN },
+].filter(red => red.url)
 </script>

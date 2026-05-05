@@ -3,8 +3,8 @@ export const ROUTE_NAMES = {
     HOME: "/",
     PRODUCTOS: "/productos",
     REDES: {
-        INSTAGRAM: "",
-        FACEBOOK: "",
+        INSTAGRAM: "https://www.instagram.com/murallonpinturas/",
+        FACEBOOK: "https://www.facebook.com/MurallonPinturas?locale=es_LA",
         YOUTUBE: "",
         LINKEDIN: "",
     },
