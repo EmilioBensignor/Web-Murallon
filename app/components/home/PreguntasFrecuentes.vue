@@ -24,28 +24,48 @@
 <script setup>
 const faqs = [
     {
-        pregunta: '¿Qué tipos de pintura ofrece Murallón?',
-        respuesta: 'Ofrecemos una línea completa de pinturas para interior y exterior: látex, esmaltes, fijadores, membranas impermeabilizantes, enduidos y revestimientos para frentes.'
+        pregunta: '¿Qué tipo de pinturas fabrican?',
+        respuesta: 'Fabricamos pinturas látex (interior/exterior), esmaltes sintéticos, impermeabilizantes, barnices y recubrimientos especiales.'
     },
     {
-        pregunta: '¿Cuántas manos de pintura necesito aplicar?',
-        respuesta: 'En general recomendamos 2 manos para una cobertura uniforme. En colores intensos o sobre superficies oscuras, puede ser necesaria una tercera mano.'
+        pregunta: '¿Cuál es la diferencia entre pintura para interior y exterior?',
+        respuesta: 'La de exterior tiene mayor resistencia a la intemperie, rayos UV y humedad.'
     },
     {
-        pregunta: '¿Es necesario usar fijador antes de pintar?',
-        respuesta: 'Sí, el fijador sellador es fundamental para preparar la superficie. Mejora la adherencia de la pintura, sella poros y reduce el consumo de pintura.'
+        pregunta: '¿Cuántos metros cuadrados cubre un litro de pintura?',
+        respuesta: 'Depende de la superficie, pero en promedio cubre entre 8 y 12 m² por mano.'
     },
     {
-        pregunta: '¿Cuánto rinde un litro de pintura Murallón?',
-        respuesta: 'El rendimiento varía según el producto. En promedio, un litro de látex cubre entre 10 y 16 m² por mano, dependiendo de la porosidad de la superficie.'
+        pregunta: '¿Cuánto tiempo tarda en secar?',
+        respuesta: 'Secado al tacto: 1–2 horas. Secado total: entre 4 y 24 horas según el producto.'
     },
     {
-        pregunta: '¿Dónde puedo comprar productos Murallón?',
-        respuesta: 'Contamos con una amplia red de distribuidores en todo el país. Podés encontrar el más cercano en nuestra sección de distribuidores.'
+        pregunta: '¿Se puede aplicar sobre cualquier superficie?',
+        respuesta: 'No. La superficie debe estar limpia, seca y preparada (lijada o con sellador si hace falta).'
     },
     {
-        pregunta: '¿Las pinturas Murallón son aptas para exterior?',
-        respuesta: 'Sí, tenemos líneas específicas para exterior con alta resistencia a la intemperie, rayos UV y humedad. Consultá nuestra línea de frentes y membranas.'
+        pregunta: '¿Hacen colores personalizados?',
+        respuesta: 'Sí, contamos con sistema de entonado para crear colores a medida.'
+    },
+    {
+        pregunta: '¿Qué preparación necesita la pared antes de pintar?',
+        respuesta: 'Eliminar polvo, grasa, pintura vieja floja y reparar imperfecciones.'
+    },
+    {
+        pregunta: '¿La pintura es lavable?',
+        respuesta: 'Sí, ofrecemos líneas lavables de alta resistencia para interiores.'
+    },
+    {
+        pregunta: '¿Hacen envíos o venta directa al público?',
+        respuesta: 'Sí, vendemos a particulares y distribuidores, con opción de entrega.'
+    },
+    {
+        pregunta: '¿Qué rendimiento tiene un balde de 20 litros?',
+        respuesta: 'Aproximadamente entre 160 y 240 m² por mano, según superficie.'
+    },
+    {
+        pregunta: '¿Brindan asesoramiento técnico?',
+        respuesta: 'Sí, ofrecemos asesoramiento para elección y aplicación del producto.'
     }
 ]
 
