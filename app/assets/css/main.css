@@ -19,6 +19,7 @@
   --color-light: #F9F9F9;
   --color-error: #F03A36;
   --color-gray-orange: #ACA19C;
+  --color-gray-dark: #D9D9D9;
   --color-gray-mid: #E9E9E9;
 
   /* Gradientes */
@@ -27,6 +28,7 @@
 
   /* Sombras */
   --shadow-1: 0px 1px 4px 0px rgba(12, 12, 13, 0.15);
+  --shadow-2: 0px 2px 6px 0px rgba(1, 1, 1, 0.08), 0px 8px 16px 0px rgba(1, 1, 1, 0.06);
 }
 
 * {

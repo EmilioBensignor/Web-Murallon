@@ -17,6 +17,7 @@ Marca de pinturas y revestimientos de Unike Group S.A. (Argentina).
 app/
 ├── assets/css/main.css       # Tema Tailwind: colores, breakpoints, fuentes
 ├── components/
+│   ├── blog/                 # Card, Contenido, Hero, Recomendados
 │   ├── button/               # Primary, Terciary (rounded-full, h-12)
 │   ├── carousel/             # Static (drag/touch/dots/arrows), Arrows
 │   ├── default/              # Header, Footer, Main, Section (layout)
@@ -25,14 +26,21 @@ app/
 │   ├── heading/              # H1, H2
 │   ├── home/                 # Hero, Destacados, Inspiracion, Blog, Distribuidores, PreguntasFrecuentes
 │   │   └── hero/             # Soluciones (3 cards con links)
-│   ├── product/              # Card (configurable via props)
-│   ├── search/               # Hero, Filtros, FiltrosAplicados, Toggle, SortSelect, RangeSlider, Label, EstadoVacio
-│   ├── blog/                 # Card
-│   └── inspiracion/          # Card (before/after hover)
-├── composables/              # useProductos, useProductosSearch, useBlog, useInspiracion, useDistribuidores
+│   ├── inspiracion/          # Card (before/after hover)
+│   ├── menu/                 # Desktop, Mobile (menú de productos por categoría)
+│   ├── product/              # Card, Hero, Sobre, SobreItem, Blog (productos recomendados)
+│   └── search/               # Hero, Filtros, FiltrosAplicados, Toggle, SortSelect, RangeSlider, Label, EstadoVacio
+├── composables/              # useProductos, useProductosSearch, useProducto, useBlog, useMurallonBlog,
+│                             # useInspiracion, useDistribuidores, useMenuProductos, useImagenesDestacadas
 ├── constants/                # ROUTE_NAMES
 ├── layouts/                  # default (Header + slot + Footer)
-├── pages/                    # index, productos
+├── pages/
+│   ├── index.vue             # Home
+│   ├── productos/
+│   │   ├── index.vue         # Listado/búsqueda de productos
+│   │   └── [nombre].vue      # Detalle de producto (slug)
+│   └── blog/
+│       └── [slug].vue        # Detalle de artículo de blog
 ├── types/                    # database.types.ts (placeholder)
 └── utils/                    # getAccionProducto
 ```
@@ -60,10 +68,15 @@ app/
 ## Componentes clave
 
 ### Layout
-- **DefaultHeader:** h-16 md:h-24, logo + CTA "Somos Unike Group" (visible lg+)
-- **DefaultFooter:** gradiente multi + secciones Contacto/Producto/Ayuda + redes sociales
+- **DefaultHeader:** h-16 md:h-24, logo + CTA "Somos Unike Group" (visible lg+) + menú productos
+- **DefaultFooter:** gradiente multi + secciones Contacto/Producto + redes sociales (filtradas por URL no vacía)
 - **DefaultMain:** flex-col con gap progresivo
 - **DefaultSection:** max-w-326 centrado, innerClass configurable
+
+### Menú
+- **MenuDesktop:** dropdown con categorías y productos (lg+)
+- **MenuMobile:** drawer/overlay para mobile
+- Ambos consumen `useMenuProductos` (agrupa productos por tipo_aplicacion en 3 soluciones: protege / prepara / renova)
 
 ### Botones
 - **ButtonPrimary:** bg-primary, text-white. Props: to, target, disabled, icon, type
@@ -78,6 +91,17 @@ app/
 - **BlogCard:** imagen + fecha + título + extracto + "Leer más". h-86 md:h-90 lg:h-114
 - **InspiracionCard:** before/after con hover. h-70 md:h-90 lg:h-112
 
+### Detalle de producto (`product/`)
+- **ProductHero:** hero del detalle con imagen + info principal
+- **ProductSobre + ProductSobreItem:** bloque "Sobre el producto" con items
+- **ProductBlog:** productos recomendados / contenido de blog asociado
+
+### Detalle de blog (`blog/`)
+- **BlogHero:** hero del artículo
+- **BlogContenido:** cuerpo del artículo
+- **BlogRecomendados:** productos relacionados al artículo (via tabla `blog-murallon-productos`)
+- **BlogCard:** card reutilizada en home y recomendados
+
 ### Carousel
 - **CarouselStatic:** drag/touch, responsive slidesPerView, dots, arrows, keyboard nav. Props: gap, slidesPerView (breakpoint object), showDots, showArrows
 - **CarouselArrows:** prev/next, visible md+
@@ -86,17 +110,20 @@ app/
 
 ### Proyecto: UnikeGroup (sa-east-1)
 - **ID:** fxytgajevhfuzwlyaorb
+- **MCP server:** `supabase-unike`
 
 ### Tablas
-- **murallon-productos:** id, nombre, imagen_principal, uso (ARRAY), tamanos_disponibles (ARRAY), tipos_aplicacion_id (FK), categorias_id (FK), rendimiento (text), destacado (bool), codigo_color_card, created_at
+- **murallon-productos:** id, nombre, slug, imagen_principal, uso (ARRAY), tamanos_disponibles (ARRAY), tipos_aplicacion_id (FK), categorias_id (FK), rendimiento (text), destacado (bool), codigo_color_card, created_at
 - **murallon-categorias:** id, nombre, created_at — Valores: Enduidos, Fijadores, Látex, Membranas, Microlátex, Pintura para frentes / revestimiento
-- **tipos_aplicacion:** id, nombre — IDs mapeados en getAccionProducto.js
-- **blog-murallon:** id, titulo, fecha, contenido, imagen_principal
+- **tipos_aplicacion:** id, nombre — IDs mapeados en getAccionProducto.js y en `useMenuProductos` (3 soluciones)
+- **blog-murallon:** id, titulo, slug, fecha, contenido, imagen_principal
+- **blog-murallon-productos:** blog_id (FK), producto_id (FK), orden — relación many-to-many blog ↔ productos
 - **inspiracion-murallon:** id, titulo, imagen_antes, imagen_despues, orden
+- **murallon-imagenes-destacadas:** nombre, imagen_chica, imagen_mediana, imagen_grande (imágenes responsive por clave)
 - **waterplast-distribuidores:** nombreComercio, provincia, localidad, calle, telefono, latitud, longitud, vende (array con 'murallon')
 
 ### Storage buckets
-- murallon-productos, blog-murallon, inspiracion-murallon
+- murallon-productos, blog-murallon, inspiracion-murallon, murallon-imagenes-destacadas
 - URL: `{supabaseUrl}/storage/v1/object/public/{bucket}/{path}`
 
 ## Páginas
@@ -119,6 +146,14 @@ Composición secuencial:
 - **Grilla:** grid 1 sm:2 lg:3 cols de ProductCard (con showTamanos + showDetalle)
 - **Estado vacío:** SearchEstadoVacio con botón restablecer
 
+### Detalle producto (/productos/[nombre])
+- **Composable:** `useProducto` — fetch by slug con join de categoría y tipo_aplicacion
+- Compuesta por ProductHero + ProductSobre + ProductBlog
+
+### Detalle blog (/blog/[slug])
+- **Composable:** `useMurallonBlog` — fetch blog by slug + productos recomendados via `blog-murallon-productos`
+- Compuesta por BlogHero + BlogContenido + BlogRecomendados
+
 ### Filtrado de productos
 - **Categorías:** toggle por nombre de categoría (join con murallon-categorias)
 - **Usos:** toggle Interior/Exterior (campo `uso` es ARRAY en DB)
@@ -128,13 +163,20 @@ Composición secuencial:
 
 ## Composables
 
-| Composable | Tabla | Filtro fetch | Campos join |
+| Composable | Tabla | Filtro fetch | Notas |
 |---|---|---|---|
-| useProductos | murallon-productos | destacado=true | tipos_aplicacion_id(id,nombre) |
-| useProductosSearch | murallon-productos | todos | tipos_aplicacion_id + categorias_id |
-| useBlog | blog-murallon | order fecha DESC | — |
+| useProductos | murallon-productos | destacado=true | join tipos_aplicacion_id(id,nombre) |
+| useProductosSearch | murallon-productos | todos | join tipos_aplicacion_id + categorias_id |
+| useProducto | murallon-productos | by slug | join categoría + tipo_aplicacion |
+| useMenuProductos | murallon-productos | todos (id, nombre, slug, tipos_aplicacion_id) | agrupa en 3 soluciones (protege/prepara/renova) |
+| useBlog | blog-murallon | order fecha DESC | listado para home |
+| useMurallonBlog | blog-murallon + blog-murallon-productos | by slug | blog + productos recomendados |
 | useInspiracion | inspiracion-murallon | order orden ASC | — |
 | useDistribuidores | waterplast-distribuidores | vende contains 'murallon' | — |
+| useImagenesDestacadas | murallon-imagenes-destacadas | by nombre | retorna { chica, mediana, grande } responsive |
+
+## Constants
+- **ROUTE_NAMES:** HOME (`/`), PRODUCTOS (`/productos`), REDES (INSTAGRAM, FACEBOOK, YOUTUBE, LINKEDIN — vacíos por defecto)
 
 ## Utils
 - **getAccionProducto(id):** mapea UUID de tipo_aplicacion a texto: "Impermeabilizá con", "Prepará con", "Pintá con"

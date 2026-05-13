@@ -1,8 +1,8 @@
 <template>
-    <div class="h-86 md:h-90 lg:h-114 flex flex-col rounded-3xl overflow-hidden">
+    <div class="h-full flex flex-col rounded-3xl overflow-hidden shadow-2">
         <NuxtImg :src="imagenUrl" :alt="post.titulo" class="w-full h-25 md:h-32 lg:h-50 object-cover" />
 
-        <div class="flex flex-col items-center md:items-start justify-between md:gap-4 flex-1 bg-white p-4 md:p-6">
+        <div class="flex flex-col items-center md:items-start gap-4 md:gap-6 flex-1 bg-white p-4 md:p-6">
             <div class="flex flex-col gap-3 md:gap-4">
                 <div class="flex flex-col gap-2">
                     <p class="text-xs lg:text-sm font-bold">{{ fechaFormateada }}</p>
@@ -11,11 +11,9 @@
                 <p class="text-xs lg:text-sm font-medium line-clamp-3">{{ extracto }}</p>
             </div>
 
-            <div class="mt-auto">
-                <ButtonPrimary :to="`/blog/${post.slug}`" class="px-12">
-                    Leer más
-                </ButtonPrimary>
-            </div>
+            <ButtonPrimary :to="`/blog/${post.slug}`" class="mt-auto px-12">
+                Leer más
+            </ButtonPrimary>
         </div>
     </div>
 </template>

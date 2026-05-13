@@ -1,6 +1,6 @@
 <template>
     <DefaultSection id="distribuidores" inner-class="gap-3 md:gap-6 lg:gap-8 relative px-4 md:px-8 lg:px-16 xxl:px-0">
-        <div class="w-full bg-(image:--gradient-multi) rounded-2xl p-1">
+        <div class="w-full bg-gradient-multi rounded-2xl p-1">
             <div class="flex flex-col md:items-center gap-6 bg-white rounded-xl p-4 md:p-6">
                 <div class="w-full flex flex-col lg:flex-row lg:justify-between items-center gap-6 lg:gap-14">
                     <div class="flex flex-col shrink-0">
@@ -110,113 +110,34 @@
 <script setup>
 const mapContainer = ref(null)
 const mapLoaded = ref(false)
-const selectedProvincia = ref('')
-const selectedLocalidad = ref('')
-const selectedComercio = ref('')
-const activeDropdown = ref(null)
-const searchProvincia = ref('')
-const searchLocalidad = ref('')
-const searchComercio = ref('')
-const selectedDistribuidor = shallowRef(null)
 const showCopyText = ref(false)
 
 let map = null
 let markers = []
 
-const { distribuidores, loading: isLoading, fetchDistribuidores } = useDistribuidores()
-
-const provincias = computed(() => {
-    return [...new Set(distribuidores.value.map(d => d.provincia))].sort()
-})
-
-const filteredProvincias = computed(() => {
-    if (!searchProvincia.value) return provincias.value
-    return provincias.value.filter(p =>
-        p.toLowerCase().includes(searchProvincia.value.toLowerCase())
-    )
-})
-
-const localidades = computed(() => {
-    if (!selectedProvincia.value) return []
-    return [...new Set(
-        distribuidores.value
-            .filter(d => d.provincia === selectedProvincia.value)
-            .map(d => d.localidad)
-    )].sort()
-})
-
-const filteredLocalidades = computed(() => {
-    if (!searchLocalidad.value) return localidades.value
-    return localidades.value.filter(l =>
-        l.toLowerCase().includes(searchLocalidad.value.toLowerCase())
-    )
-})
-
-const comercios = computed(() => {
-    if (!selectedLocalidad.value) return []
-    return distribuidores.value.filter(d =>
-        d.provincia === selectedProvincia.value &&
-        d.localidad === selectedLocalidad.value
-    )
-})
-
-const filteredComercios = computed(() => {
-    if (!searchComercio.value) return comercios.value
-    return comercios.value.filter(c =>
-        c.nombreComercio.toLowerCase().includes(searchComercio.value.toLowerCase())
-    )
-})
-
-const selectedComercioName = computed(() => {
-    if (!selectedComercio.value) return ''
-    const comercio = distribuidores.value.find(d => d.id == selectedComercio.value)
-    return comercio ? comercio.nombreComercio : ''
-})
-
-const filteredDistribuidores = computed(() => {
-    if (!selectedProvincia.value) return []
-    let result = distribuidores.value.filter(d => d.provincia === selectedProvincia.value)
-    if (selectedLocalidad.value) {
-        result = result.filter(d => d.localidad === selectedLocalidad.value)
-    }
-    if (selectedComercio.value) {
-        result = result.filter(d => d.id == selectedComercio.value)
-    }
-    return result
-})
-
-const toggleDropdown = (dropdown) => {
-    if (activeDropdown.value === dropdown) {
-        activeDropdown.value = null
-        return
-    }
-    activeDropdown.value = dropdown
-    nextTick(() => {
-        if (dropdown === 'provincia') searchProvincia.value = ''
-        if (dropdown === 'localidad') searchLocalidad.value = ''
-        if (dropdown === 'comercio') searchComercio.value = ''
-    })
-}
-
-const selectProvincia = (provincia) => {
-    selectedProvincia.value = provincia
-    selectedLocalidad.value = ''
-    selectedComercio.value = ''
-    activeDropdown.value = null
-    searchProvincia.value = ''
-}
-
-const selectLocalidad = (localidad) => {
-    selectedLocalidad.value = localidad
-    selectedComercio.value = ''
-    activeDropdown.value = null
-    searchLocalidad.value = ''
-}
+const {
+    isLoading,
+    fetchDistribuidores,
+    selectedProvincia,
+    selectedLocalidad,
+    activeDropdown,
+    searchProvincia,
+    searchLocalidad,
+    searchComercio,
+    selectedDistribuidor,
+    filteredProvincias,
+    filteredLocalidades,
+    filteredComercios,
+    selectedComercioName,
+    filteredDistribuidores,
+    toggleDropdown,
+    selectProvincia,
+    selectLocalidad,
+    selectComercio: selectComercioBase,
+} = useDistribuidoresMapa()
 
 const selectComercio = (comercio) => {
-    selectedComercio.value = comercio.id
-    activeDropdown.value = null
-    searchComercio.value = ''
+    selectComercioBase(comercio)
 
     if (map && comercio) {
         const lat = parseFloat(comercio.latitud)
@@ -334,11 +255,11 @@ const updateMarkers = () => {
                 position,
                 map,
                 title: distribuidor.nombreComercio,
-                content: markerContainer
+                content: markerContainer,
+                gmpClickable: true
             })
 
-            marker.addListener('click', () => { selectedDistribuidor.value = distribuidor })
-            markerContainer.addEventListener('click', () => { selectedDistribuidor.value = distribuidor }, { passive: true })
+            marker.addListener('gmp-click', () => { selectedDistribuidor.value = distribuidor })
 
             markers.push(marker)
             bounds.extend(position)
