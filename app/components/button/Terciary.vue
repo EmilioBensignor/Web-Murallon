@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink v-if="to" :to="to"
+    <NuxtLink v-if="to" :to="to" :target="target"
         class="h-12 flex justify-center items-center gap-2 bg-terciary rounded-full text-primary text-base font-bold transition duration-300 cursor-pointer py-3.5 px-6">
         <Icon v-if="icon" :name="`material-symbols:${icon}`" size="24" class="shrink-0" />
         <slot />
@@ -16,6 +16,10 @@
 defineProps({
     to: {
         type: [String, Object],
+        default: null
+    },
+    target: {
+        type: String,
         default: null
     },
     disabled: {

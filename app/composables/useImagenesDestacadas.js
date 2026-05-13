@@ -13,9 +13,10 @@ export const useImagenesDestacadas = () => {
         .from('murallon-imagenes-destacadas')
         .select('imagen_chica, imagen_mediana, imagen_grande')
         .eq('nombre', nombre)
-        .single()
+        .maybeSingle()
 
       if (error) throw error
+      if (!data) return null
 
       return {
         chica: getImageUrl(data.imagen_chica),

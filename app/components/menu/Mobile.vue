@@ -42,12 +42,29 @@
                             <div v-if="nivel === 0" key="nivel-0" class="flex flex-col gap-6 px-4 sm:px-6">
                                 <nav class="flex flex-col">
                                     <button type="button"
-                                        class="text-left text-sm font-bold text-secondary py-4 cursor-pointer"
+                                        class="flex items-center justify-between text-left text-sm text-secondary font-bold cursor-pointer py-4"
                                         @click="irA(1)">
                                         Productos
+                                        <Icon name="material-symbols:chevron-right-rounded" size="20"
+                                            class="text-secondary" />
                                     </button>
+                                    <NuxtLink :to="ROUTE_NAMES.DISTRIBUIDORES"
+                                        class="text-left text-sm text-secondary font-bold cursor-pointer py-4"
+                                        @click="close">
+                                        Distribuidores
+                                    </NuxtLink>
+                                    <NuxtLink :to="ROUTE_NAMES.BLOG"
+                                        class="text-left text-sm text-secondary font-bold cursor-pointer py-4"
+                                        @click="close">
+                                        Blog
+                                    </NuxtLink>
+                                    <NuxtLink :to="ROUTE_NAMES.CONTACTO"
+                                        class="text-left text-sm text-secondary font-bold cursor-pointer py-4"
+                                        @click="close">
+                                        Contacto
+                                    </NuxtLink>
                                     <a href="https://unikegroup.com.ar" target="_blank"
-                                        class="text-left text-sm font-bold text-secondary py-4 cursor-pointer">
+                                        class="text-left text-sm text-secondary font-bold cursor-pointer py-4">
                                         Somos Unike Group
                                     </a>
                                 </nav>

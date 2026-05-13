@@ -27,6 +27,8 @@ export const useBlog = () => {
   }
 
   const getImageUrl = (path) => {
+    if (!path) return ''
+    if (path.startsWith('/') || path.startsWith('http')) return path
     return `${config.public.supabase.url}/storage/v1/object/public/blog-murallon/${path}`
   }
 

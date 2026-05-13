@@ -1,16 +1,8 @@
 <template>
-    <DefaultSection inner-class="md:items-center md:gap-6 xxl:gap-8" class="px-4 md:px-8 lg:px-16">
-        <div class="lg:w-full flex flex-col lg:flex-row lg:justify-between md:items-center gap-3 md:gap-6">
-            <HeadingH2 class="text-primary uppercase">Preguntas Frecuentes</HeadingH2>
+    <DefaultSection inner-class="items-start gap-3 md:gap-6 xxl:gap-8" class="px-4 md:px-8 lg:px-16">
+        <HeadingH2 class="w-full text-center md:text-left text-primary uppercase">Preguntas Frecuentes</HeadingH2>
 
-            <!-- <div class="flex flex-col md:flex-row gap-2">
-                <ButtonPrimary class="md:w-60">Sobre nosotros</ButtonPrimary>
-                <ButtonPrimary class="md:w-60 bg-white border border-primary text-primary!">Sobre nuestras pinturas
-                </ButtonPrimary>
-            </div> -->
-        </div>
-
-        <div class="flex flex-col md:grid md:grid-cols-2 gap-3 md:gap-8 xxl:gap-12">
+        <div class="w-full flex flex-col md:grid md:grid-cols-2 gap-3 md:gap-8 xxl:gap-12">
             <div class="flex flex-col gap-3 lg:gap-4">
                 <FaqAccordion v-for="(faq, index) in primeraColumna" :key="index" :faq="faq" />
             </div>

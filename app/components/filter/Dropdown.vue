@@ -3,7 +3,7 @@
         <button @click="$emit('toggle')" :disabled="disabled"
             class="w-full flex items-center justify-between gap-2 bg-white border-2 border-primary rounded-full px-4 py-2.5 text-sm font-medium transition-colors"
             :class="disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'">
-            <span :class="value ? 'text-dark' : 'text-gray-dark'">
+            <span :class="textColorClass">
                 {{ value || placeholder }}
             </span>
             <Icon name="material-symbols:keyboard-arrow-down-rounded" size="1.25rem"
@@ -59,4 +59,9 @@ const getOptionLabel = (option) => {
     }
     return option
 }
+
+const textColorClass = computed(() => {
+    if (props.value) return 'text-dark'
+    return props.disabled ? 'text-gray-dark' : 'text-primary'
+})
 </script>

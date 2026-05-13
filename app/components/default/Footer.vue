@@ -58,17 +58,17 @@ const secciones = [
     {
         titulo: 'Producto',
         links: [
-            { texto: 'Catálogo', to: ROUTE_NAMES.PRODUCTOS },
+            { texto: 'Catálogo de colores', to: ROUTE_NAMES.PRODUCTOS },
         ],
     },
-    // {
-    //     titulo: 'Ayuda',
-    //     links: [
-    //         { texto: 'Preguntas Frecuentes', to: '/preguntas-frecuentes' },
-    //         { texto: 'Distribuidores', to: '/distribuidores' },
-    //         { texto: 'Nuestro Blog', to: '/blog' },
-    //     ],
-    // },
+    {
+        titulo: 'Ayuda',
+        links: [
+            { texto: 'Distribuidores', to: ROUTE_NAMES.DISTRIBUIDORES },
+            { texto: 'Nuestro Blog', to: ROUTE_NAMES.BLOG },
+            { texto: 'Contacto', to: ROUTE_NAMES.CONTACTO },
+        ],
+    },
 ]
 
 const redes = [

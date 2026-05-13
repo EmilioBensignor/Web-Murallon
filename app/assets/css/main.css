@@ -21,6 +21,7 @@
   --color-gray-orange: #ACA19C;
   --color-gray-dark: #D9D9D9;
   --color-gray-mid: #E9E9E9;
+  --color-coral: #E95C94;
 
   /* Gradientes */
   --gradient-multi: linear-gradient(90deg, #E95C94 0%, #EBC213 25%, #B2CC38 50%, #50AC35 75%, #3F78BC 100%);
