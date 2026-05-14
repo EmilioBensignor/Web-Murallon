@@ -1,7 +1,7 @@
 <template>
     <DefaultSection class="bg-primary" inner-class="md:flex-row-reverse gap-0">
         <picture class="w-full md:w-1/2 md:h-auto md:self-stretch flex">
-            <NuxtImg src="/images/contacto/murallon_contacto_hero.webp" alt="Contacto Murallón"
+            <img src="/images/contacto/murallon_contacto_hero.webp" alt="Contacto Murallón"
                 class="w-full h-50 md:h-80 lg:h-125 xxl:h-125 object-cover" />
         </picture>
         <div
