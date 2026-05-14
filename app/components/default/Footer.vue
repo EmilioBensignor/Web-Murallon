@@ -69,6 +69,14 @@ const secciones = [
             { texto: 'Contacto', to: ROUTE_NAMES.CONTACTO },
         ],
     },
+    {
+        titulo: 'Somos Unike Group',
+        links: [
+            { texto: 'Unike Group', href: 'https://www.unikegroup.com.ar', target: '_blank' },
+            { texto: 'Waterplast', href: 'https://www.unikegroup.com.ar/waterplast', target: '_blank' },
+            { texto: 'Rohermet', href: 'https://www.unikegroup.com.ar/rohermet', target: '_blank' },
+        ],
+    },
 ]
 
 const redes = [
