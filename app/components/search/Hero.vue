@@ -1,13 +1,10 @@
 <template>
     <DefaultSection class="relative" inner-class="xxl:max-w-full">
         <picture class="w-full">
-            <source media="(min-width: 1440px)" srcset="/images/search/Hero-Murallon-Productos-1440.png" width="1440"
-                height="384" />
-            <source media="(min-width: 1080px)" srcset="/images/search/Hero-Murallon-Productos-1080.png" width="1080"
-                height="505" />
-            <source media="(min-width: 768px)" srcset="/images/search/Hero-Murallon-Productos-768.png" width="768"
-                height="256" />
-            <NuxtImg src="/images/search/Hero-Murallon-Productos-mobile.png" alt="Productos Murallon"
+            <source media="(min-width: 1440px)" srcset="/images/search/murallon_search_hero_1440.webp" />
+            <source media="(min-width: 1080px)" srcset="/images/search/murallon_search_hero_1080.webp" />
+            <source media="(min-width: 768px)" srcset="/images/search/murallon_search_hero_768.webp" />
+            <NuxtImg src="/images/search/murallon_search_hero_320.webp" alt="Productos Murallon"
                 class="w-full min-h-64 lg:min-h-126 object-cover" />
         </picture>
         <div
