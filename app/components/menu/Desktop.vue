@@ -40,6 +40,8 @@
         <NuxtLink :to="ROUTE_NAMES.DISTRIBUIDORES" class="text-primary font-bold">Distribuidores</NuxtLink>
         <NuxtLink :to="ROUTE_NAMES.BLOG" class="text-primary font-bold">Blog</NuxtLink>
         <NuxtLink :to="ROUTE_NAMES.CONTACTO" class="text-primary font-bold">Contacto</NuxtLink>
+        <a v-if="catalogoUrl" :href="catalogoUrl" :download="true" target="_blank" rel="noopener noreferrer"
+            class="text-primary font-bold">Catálogo</a>
     </nav>
 </template>
 
@@ -47,6 +49,7 @@
 import { ROUTE_NAMES } from '~/constants/ROUTE_NAMES';
 
 const { categorias, fetchMenuProductos } = useMenuProductos()
+const { catalogoUrl, fetchCatalogo } = useCatalogo()
 
 const dropdownRef = ref(null)
 const isOpen = ref(false)
@@ -66,6 +69,7 @@ function handleClickOutside(event) {
 
 onMounted(() => {
     fetchMenuProductos()
+    fetchCatalogo()
     document.addEventListener('click', handleClickOutside)
 })
 

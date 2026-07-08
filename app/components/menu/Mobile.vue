@@ -63,6 +63,12 @@
                                         @click="close">
                                         Contacto
                                     </NuxtLink>
+                                    <a v-if="catalogoUrl" :href="catalogoUrl" :download="true" target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="text-left text-sm text-secondary font-bold cursor-pointer py-4"
+                                        @click="close">
+                                        Catálogo
+                                    </a>
                                     <a href="https://unikegroup.com.ar" target="_blank"
                                         class="text-left text-sm text-secondary font-bold cursor-pointer py-4">
                                         Somos Unike Group
@@ -102,6 +108,7 @@
 import { ROUTE_NAMES } from '~/constants/ROUTE_NAMES';
 
 const { categorias, fetchMenuProductos } = useMenuProductos()
+const { catalogoUrl, fetchCatalogo } = useCatalogo()
 
 const isOpen = ref(false)
 const nivel = ref(0)
@@ -130,5 +137,6 @@ watch(isOpen, (val) => {
 
 onMounted(() => {
     fetchMenuProductos()
+    fetchCatalogo()
 })
 </script>
