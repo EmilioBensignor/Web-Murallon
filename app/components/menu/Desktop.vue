@@ -15,7 +15,7 @@
                         <div class="flex flex-col shrink-0 w-max">
                             <p class="text-secondary font-bold p-4">Por categoría</p>
                             <NuxtLink v-for="cat in categorias" :key="cat.nombre"
-                                :to="{ path: ROUTE_NAMES.PRODUCTOS, query: { solucion: cat.solucion } }" :class="[
+                                :to="{ path: ROUTE_NAMES.PRODUCTOS, query: cat.query }" :class="[
                                     'text-left text-sm font-semibold hover:bg-gray-mid rounded-full transition-colors cursor-pointer p-4',
                                     categoriaHover?.nombre === cat.nombre ? 'bg-gray-mid' : '',]"
                                 @mouseenter="categoriaHover = cat" @click="isOpen = false">

@@ -4,6 +4,8 @@ export const useMenuProductos = () => {
   const categorias = ref([])
   const loading = ref(false)
 
+  const CATEGORIA_ACCESORIOS_ID = 'fbe870d4-48fd-488e-82a7-8947252fc851'
+
   const CATEGORIAS_MENU = {
     'Soluciones para impermeabilizar': {
       solucion: 'protege',
@@ -27,15 +29,22 @@ export const useMenuProductos = () => {
     try {
       const { data, error } = await supabase
         .from('murallon-productos')
-        .select('id, nombre, slug, tipos_aplicacion_id')
+        .select('id, nombre, slug, tipos_aplicacion_id, categorias_id')
 
       if (error) throw error
 
-      categorias.value = Object.entries(CATEGORIAS_MENU).map(([nombre, { solucion, ids }]) => ({
-        nombre,
-        solucion,
-        productos: (data || []).filter(p => ids.includes(p.tipos_aplicacion_id)),
-      }))
+      categorias.value = [
+        ...Object.entries(CATEGORIAS_MENU).map(([nombre, { solucion, ids }]) => ({
+          nombre,
+          query: { solucion },
+          productos: (data || []).filter(p => ids.includes(p.tipos_aplicacion_id)),
+        })),
+        {
+          nombre: 'Accesorios',
+          query: { categoria: 'Accesorios' },
+          productos: (data || []).filter(p => p.categorias_id === CATEGORIA_ACCESORIOS_ID),
+        },
+      ]
     } catch (e) {
       console.error('Error al obtener menú de productos:', e)
     } finally {

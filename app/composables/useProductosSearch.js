@@ -15,6 +15,7 @@ export const useProductosSearch = () => {
     'Membranas',
     'Microlátex',
     'Pintura para frentes / revestimiento',
+    'Accesorios',
   ]
 
   const USOS = ['Interior', 'Exterior']
@@ -55,6 +56,10 @@ export const useProductosSearch = () => {
   CATEGORIAS.forEach(c => { filtros.value.categorias[c] = false })
   USOS.forEach(u => { filtros.value.usos[u] = false })
   TAMANOS.forEach(t => { filtros.value.tamanos[t] = false })
+
+  if (CATEGORIAS.includes(route.query.categoria)) {
+    filtros.value.categorias[route.query.categoria] = true
+  }
 
   const filtrosAplicados = computed(() => {
     const aplicados = []

@@ -84,7 +84,7 @@
                                 <nav class="flex flex-col gap-1">
                                     <p class="text-left text-sm font-bold text-secondary py-4">Por categoría</p>
                                     <NuxtLink v-for="cat in categorias" :key="cat.nombre"
-                                        :to="{ path: ROUTE_NAMES.PRODUCTOS, query: { solucion: cat.solucion } }"
+                                        :to="{ path: ROUTE_NAMES.PRODUCTOS, query: cat.query }"
                                         class="text-left text-xs font-semibold text-dark py-4 cursor-pointer"
                                         @click="close">
                                         {{ cat.nombre }}
